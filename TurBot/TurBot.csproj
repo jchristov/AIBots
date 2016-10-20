@@ -129,7 +129,8 @@
     <Content Include="packages.config" />
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="apiapp.json" />
-    <None Include="Properties\PublishProfiles\AIBots.pubxml" />
+    <None Include="Properties\PublishProfiles\AIBots - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\AIBots - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
