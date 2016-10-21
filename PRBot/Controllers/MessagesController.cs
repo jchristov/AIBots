@@ -23,7 +23,7 @@ namespace PRBot
             LUIS Data = new LUIS();
             using (HttpClient client = new HttpClient())
             {
-                string RequestURI = "$modelURL&q=" + Query;
+                string RequestURI = modelURL + "&q=" + Query;
                 HttpResponseMessage msg = await client.GetAsync(RequestURI);
 
                 if (msg.IsSuccessStatusCode)
@@ -47,8 +47,11 @@ namespace PRBot
                 // calculate something for us to return
                 int length = (activity.Text ?? string.Empty).Length;
 
-                // return our reply to the user
-                Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
+                // return reply to the user
+                LUIS luis = await GetEntityFromLUIS(activity.Text);
+                string sIntent = luis.intents[0].intent;
+                Activity reply = activity.CreateReply(sIntent);
+                //Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters");
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }
             else
